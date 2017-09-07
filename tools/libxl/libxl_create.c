@@ -318,6 +318,8 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
         libxl_defbool_setdefault(&b_info->u.hvm.acpi_s4,            true);
         libxl_defbool_setdefault(&b_info->u.hvm.nx,                 true);
         libxl_defbool_setdefault(&b_info->u.hvm.viridian,           false);
+        libxl_defbool_setdefault(&b_info->u.hvm.spoof_viridian,     false);
+        libxl_defbool_setdefault(&b_info->u.hvm.spoof_xen,          false);
         libxl_defbool_setdefault(&b_info->u.hvm.hpet,               true);
         libxl_defbool_setdefault(&b_info->u.hvm.vpt_align,          true);
         libxl_defbool_setdefault(&b_info->u.hvm.nested_hvm,         false);
@@ -1351,6 +1353,11 @@ static void domcreate_launch_dm(libxl__egc *egc, libxl__multidev *multidev,
         libxl_device_vkb_init(&vkb);
         libxl__device_vkb_add(gc, domid, &vkb);
         libxl_device_vkb_dispose(&vkb);
+
+        LOG(DEBUG, "Checking spoofing for guest (domid %d): xen %d, vir %d", domid,
+                                        libxl_defbool_val(d_config->b_info.u.hvm.spoof_xen),
+                                        libxl_defbool_val(d_config->b_info.u.hvm.spoof_viridian)
+                         );
 
         dcs->sdss.dm.guest_domid = domid;
         if (libxl_defbool_val(d_config->b_info.device_model_stubdomain))

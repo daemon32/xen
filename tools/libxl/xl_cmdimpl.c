@@ -1586,6 +1586,10 @@ static void parse_config_data(const char *config_source,
         xlu_cfg_get_defbool(config, "hpet", &b_info->u.hvm.hpet, 0);
         xlu_cfg_get_defbool(config, "vpt_align", &b_info->u.hvm.vpt_align, 0);
 
+        /* For spoofing Xen */
+        xlu_cfg_get_defbool(config, "spoof_xen", &b_info->u.hvm.spoof_xen, 0);
+        xlu_cfg_get_defbool(config, "spoof_viridian", &b_info->u.hvm.spoof_viridian, 0);
+
         switch (xlu_cfg_get_list(config, "viridian",
                                  &viridian, &num_viridian, 1))
         {

@@ -5281,6 +5281,14 @@ static int hvmop_set_param(
     case HVM_PARAM_IOREQ_SERVER_PFN:
         d->arch.hvm_domain.ioreq_gmfn.base = a.value;
         break;
+    case HVM_PARAM_SPOOF_XEN:
+        printk("spoof_xen %" PRId64 " - curr dom %d, dom %d\n", a.value, curr_d->domain_id, d->domain_id);
+        d->arch.hvm_domain.spoof_xen = a.value;
+        break;
+    case HVM_PARAM_SPOOF_VIRIDIAN:
+        printk("spoof_vir %" PRId64 " - curr dom %d, dom %d\n", a.value, curr_d->domain_id, d->domain_id);
+        d->arch.hvm_domain.spoof_viridian = a.value;
+        break;
     case HVM_PARAM_NR_IOREQ_SERVER_PAGES:
     {
         unsigned int i;

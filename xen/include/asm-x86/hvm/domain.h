@@ -125,6 +125,9 @@ struct hvm_domain {
     /* hypervisor intercepted msix table */
     struct list_head       msixtbl_list;
 
+    bool_t                 spoof_xen;
+    bool_t                 spoof_viridian;
+
     struct viridian_domain viridian;
 
     bool_t                 hap_enabled;

@@ -915,9 +915,18 @@ int cpuid_hypervisor_leaves( uint32_t idx, uint32_t sub_idx,
     {
     case 0:
         *eax = base + limit; /* Largest leaf */
-        *ebx = XEN_CPUID_SIGNATURE_EBX;
-        *ecx = XEN_CPUID_SIGNATURE_ECX;
-        *edx = XEN_CPUID_SIGNATURE_EDX;
+	if (!currd->arch.hvm_domain.spoof_xen) {
+           printk("cpuid_hypervisor_leaves - real id. domid %d\n",currd->domain_id);
+               *ebx = XEN_CPUID_SIGNATURE_EBX;
+               *ecx = XEN_CPUID_SIGNATURE_ECX;
+               *edx = XEN_CPUID_SIGNATURE_EDX;
+	} else
+	{
+           printk("cpuid_hypervisor_leaves - spoofed id. domid %d\n",currd->domain_id);
+               *ebx = ZEN_CPUID_SIGNATURE_EBX;
+               *ecx = ZEN_CPUID_SIGNATURE_ECX;
+               *edx = ZEN_CPUID_SIGNATURE_EDX;
+	}
         break;
 
     case 1:

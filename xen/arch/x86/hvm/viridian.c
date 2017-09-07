@@ -84,9 +84,16 @@ int cpuid_viridian_leaves(unsigned int leaf, unsigned int *eax,
     {
     case 0:
         *eax = 0x40000006; /* Maximum leaf */
-        *ebx = 0x7263694d; /* Magic numbers  */
-        *ecx = 0x666F736F;
-        *edx = 0x76482074;
+        if (!d->arch.hvm_domain.spoof_viridian) {  // "Microsoft Hv"
+               *ebx = 0x7263694d; // rciM
+               *ecx = 0x666F736F; // foso
+               *edx = 0x76482074; // vH t
+        } else {
+            printk("wetware cpuid_viridian_leaves spoof_vir\n"); // "Wetware Labs"
+               *ebx = 0x77746557; // wteW
+               *ecx = 0x20657261; //  era
+               *edx = 0x7362614C; // sbaL
+        }
         break;
     case 1:
         *eax = 0x31237648; /* Version number */

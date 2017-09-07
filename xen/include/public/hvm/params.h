@@ -253,6 +253,10 @@
  */
 #define HVM_PARAM_X87_FIP_WIDTH 36
 
-#define HVM_NR_PARAMS 37
+#define HVM_PARAM_SPOOF_XEN    37
+
+#define HVM_PARAM_SPOOF_VIRIDIAN    38
+
+#define HVM_NR_PARAMS 39
 
 #endif /* __XEN_PUBLIC_HVM_PARAMS_H__ */

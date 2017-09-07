@@ -293,6 +293,10 @@ static void hvm_set_conf_params(xc_interface *handle, uint32_t domid,
                     libxl_defbool_val(info->u.hvm.nested_hvm));
     xc_hvm_param_set(handle, domid, HVM_PARAM_ALTP2M,
                     libxl_defbool_val(info->u.hvm.altp2m));
+    xc_hvm_param_set(handle, domid, HVM_PARAM_SPOOF_XEN,
+                    libxl_defbool_val(info->u.hvm.spoof_xen));
+    xc_hvm_param_set(handle, domid, HVM_PARAM_SPOOF_VIRIDIAN,
+                    libxl_defbool_val(info->u.hvm.spoof_viridian));
 }
 
 int libxl__build_pre(libxl__gc *gc, uint32_t domid,
