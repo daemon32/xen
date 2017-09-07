@@ -274,6 +274,10 @@
  */
 #define HVM_PARAM_VM86_TSS_SIZED 37
 
-#define HVM_NR_PARAMS 38
+/* Used to avoid detection of the VMM */
+#define HVM_PARAM_SPOOF_XEN		38
+#define HVM_PARAM_SPOOF_VIRIDIAN	39
+
+#define HVM_NR_PARAMS 40
 
 #endif /* __XEN_PUBLIC_HVM_PARAMS_H__ */

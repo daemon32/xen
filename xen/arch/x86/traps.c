@@ -935,9 +935,18 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
     {
     case 0:
         res->a = base + limit; /* Largest leaf */
-        res->b = XEN_CPUID_SIGNATURE_EBX;
-        res->c = XEN_CPUID_SIGNATURE_ECX;
-        res->d = XEN_CPUID_SIGNATURE_EDX;
+	if (!d->arch.hvm_domain.spoof_xen) {
+	    printk("cpuid_hypervisor_leaves - real id. domid %d\n", d->domain_id);
+	        res->b = XEN_CPUID_SIGNATURE_EBX;
+        	res->c = XEN_CPUID_SIGNATURE_ECX;
+	        res->d = XEN_CPUID_SIGNATURE_EDX;
+	} else
+	{
+	    printk("cpuid_hypervisor_leaves - spoofed id. domid %d\n", d->domain_id);
+		res->b = ZEN_CPUID_SIGNATURE_EBX;
+		res->c = ZEN_CPUID_SIGNATURE_ECX;
+		res->d = ZEN_CPUID_SIGNATURE_EDX;
+	}
         break;
 
     case 1:

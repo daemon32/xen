@@ -135,9 +135,11 @@ static void init_hypercalls(void)
 
         if ( !strcmp("XenVMMXenVMM", signature) )
             break;
+        if ( !strcmp("ZenZenZenZen", signature) )
+            break;
     }
 
-    BUG_ON(strcmp("XenVMMXenVMM", signature) || ((eax - base) < 2));
+    BUG_ON( (strcmp("XenVMMXenVMM", signature) && strcmp("ZenZenZenZen", signature) ) || ((eax - base) < 2));
 
     /* Fill in hypercall transfer pages. */
     cpuid(base + 2, &eax, &ebx, &ecx, &edx);

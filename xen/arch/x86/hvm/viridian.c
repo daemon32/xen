@@ -210,9 +210,16 @@ void cpuid_viridian_leaves(const struct vcpu *v, uint32_t leaf,
     case 0:
         /* See section 2.4.1 of the specification */
         res->a = 0x40000006; /* Maximum leaf */
-        memcpy(&res->b, "Micr", 4);
-        memcpy(&res->c, "osof", 4);
-        memcpy(&res->d, "t Hv", 4);
+	if (!d->arch.hvm_domain.spoof_viridian) { // "Microsoft Hv"
+	        memcpy(&res->b, "Micr", 4);
+        	memcpy(&res->c, "osof", 4);
+	        memcpy(&res->d, "t Hv", 4);
+	} else {
+	    printk("wetware cpuid_viridian_leaves spoof_vir\n"); // "Wetware Labs"
+		memcpy(&res->b, "Wetw", 4);
+		memcpy(&res->c, "are ", 4);
+		memcpy(&res->d, "Labs", 4);
+	}
         break;
 
     case 1:

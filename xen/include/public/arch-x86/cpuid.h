@@ -53,6 +53,10 @@
 #define XEN_CPUID_SIGNATURE_ECX 0x65584d4d /* "MMXe" */
 #define XEN_CPUID_SIGNATURE_EDX 0x4d4d566e /* "nVMM" */
 
+#define ZEN_CPUID_SIGNATURE_EBX 0x5A6e655A /* "ZenZ" */
+#define ZEN_CPUID_SIGNATURE_ECX 0x655A6e65 /* "enZe" */
+#define ZEN_CPUID_SIGNATURE_EDX 0x6e655A6e /* "nZen" */
+
 /*
  * Leaf 2 (0x40000x01)
  * EAX[31:16]: Xen major version.

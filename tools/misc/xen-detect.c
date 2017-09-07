@@ -69,6 +69,8 @@ static int check_for_xen(int pv_context)
 
         if ( !strcmp("XenVMMXenVMM", signature) && (regs[0] >= (base + 2)) )
             goto found;
+        if ( !strcmp("ZenZenZenZen", signature) && (regs[0] >= (base + 2)) )
+            goto found;
     }
 
     return 0;
